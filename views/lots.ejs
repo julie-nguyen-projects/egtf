@@ -1,16 +1,35 @@
 <%- include("_header") -%>
 
-<h1>Liste des lots</h1>
+<h1>Liste des lots (<%= model.length %>)</h1>
 
-<ul>
-
-    <% for (const lot of model) { %>
-        <li>
-            <%= lot.NomBoutique %>
-            <em>(<%= lot.Description %>)</em>
-        </li>
-    <% } %>
-
-</ul>
+<div class="table-responsive-sm">
+    <table class="table table-hover">
+        <thead>
+        <tr>
+            <th>Nom de la Boutique</th>
+            <th>Description du lot</th>
+            <th>Maison</th>
+            <th>Livraison</th>
+            <th class="d-print-none">
+                <a class="btn btn-sm btn-success" href="/create">Ajouter</a>
+            </th>
+        </tr>
+        </thead>
+        <tbody>
+        <% for (const lot of model) { %>
+            <tr>
+                <td><%= lot.NomBoutique %></td>
+                <td><%= lot.Description %></td>
+                <td><%= lot.Maison %></td>
+                <td><%= lot.Livraison %></td>
+                <td class="d-print-none">
+                    <a class="btn btn-sm btn-warning" href="/edit/<%= lot.Lot_ID %>">Modifier</a>
+                    <a class="btn btn-sm btn-danger" href="/delete/<%= lot.Lot_ID %>">Effacer</a>
+                </td>
+            </tr>
+        <% } %>
+        </tbody>
+    </table>
+</div>
 
 <%- include("_footer") -%>
