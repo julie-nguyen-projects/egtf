@@ -13,4 +13,17 @@ router.get('/', function(req, res, next) {
     });
 });
 
+/* Get /edit/:id */
+router.get('/edit/:id',(req, res) => {
+        const id = req.params.id;
+        const sql = "SELECT * FROM Lots WHERE Lot_ID = ?";
+        db.get(sql, id, (err, row) => {
+            if (err) {
+                return console.error(err.message);
+            }
+            res.render("editLot", { model: row });
+        });
+    }
+);
+
 module.exports = router;
