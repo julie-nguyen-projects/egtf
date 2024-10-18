@@ -1,0 +1,16 @@
+<%- include("_header") -%>
+
+<h1>Liste des lots</h1>
+
+<ul>
+
+    <% for (const lot of model) { %>
+        <li>
+            <%= lot.NomBoutique %>
+            <em>(<%= lot.Description %>)</em>
+        </li>
+    <% } %>
+
+</ul>
+
+<%- include("_footer") -%>
