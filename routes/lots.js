@@ -26,4 +26,17 @@ router.get('/edit/:id',(req, res) => {
     }
 );
 
+/* Update Lot post /edit/:id */
+router.post('/edit/:id',(req, res) => {
+    const id = req.params.id;
+    const lot = [req.body.NomBoutique, req.body.Maison, req.body.Description, req.body.Livraison, id];
+    const sql = "UPDATE Lots SET NomBoutique = ?, Maison = ?, Description = ?, Livraison = ? WHERE (Lot_ID = ?)";
+    db.run(sql, lot, err => {
+        if (err) {
+            console.error('Problème lors de la mise à jour du lot' + id);
+        }
+        res.redirect("/lots");
+    });
+});
+
 module.exports = router;
