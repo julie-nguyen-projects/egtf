@@ -39,7 +39,7 @@ router.post('/edit/:id',(req, res) => {
     });
 });
 
-/* GET create Lot /create */
+/* GET create page Lot /create */
 router.get('/create', (req, res) => {
     res.render("createLot", { model: {} });
 });
@@ -49,6 +49,26 @@ router.post("/create", (req, res) => {
     const sql = "INSERT INTO Lots (NomBoutique, Maison, Description, Livraison) VALUES (?, ?, ?, ?)";
     const lot = [req.body.NomBoutique, req.body.Maison, req.body.Description, req.body.Livraison];
     db.run(sql, lot, err => {
+        // if (err) ...
+        res.redirect("/lots");
+    });
+});
+
+/* Get delete page Lot /delete/:id */
+router.get("/delete/:id", (req, res) => {
+    const id = req.params.id;
+    const sql = "SELECT * FROM Lots WHERE Lot_ID = ?";
+    db.get(sql, id, (err, row) => {
+        // if (err) ...
+        res.render("deleteLot", { model: row });
+    });
+});
+
+/* POST delete lot /delete/:id */
+router.post("/delete/:id", (req, res) => {
+    const id = req.params.id;
+    const sql = "DELETE FROM Lots WHERE Lot_ID = ?";
+    db.run(sql, id, err => {
         // if (err) ...
         res.redirect("/lots");
     });
