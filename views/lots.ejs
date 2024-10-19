@@ -11,7 +11,7 @@
             <th>Maison</th>
             <th>Livraison</th>
             <th class="d-print-none">
-                <a class="btn btn-sm btn-success" href="/create">Ajouter</a>
+                <a class="btn btn-sm btn-success" href="/lots/create">Ajouter</a>
             </th>
         </tr>
         </thead>
@@ -24,7 +24,7 @@
                 <td><%= lot.Livraison %></td>
                 <td class="d-print-none">
                     <a class="btn btn-sm btn-warning" href="/lots/edit/<%= lot.Lot_ID %>">Modifier</a>
-                    <a class="btn btn-sm btn-danger" href="/delete/<%= lot.Lot_ID %>">Effacer</a>
+                    <a class="btn btn-sm btn-danger" href="/lots/delete/<%= lot.Lot_ID %>">Effacer</a>
                 </td>
             </tr>
         <% } %>

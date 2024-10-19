@@ -13,7 +13,7 @@ router.get('/', function(req, res, next) {
     });
 });
 
-/* Get /edit/:id */
+/* GET /edit/:id */
 router.get('/edit/:id',(req, res) => {
         const id = req.params.id;
         const sql = "SELECT * FROM Lots WHERE Lot_ID = ?";
@@ -26,7 +26,7 @@ router.get('/edit/:id',(req, res) => {
     }
 );
 
-/* Update Lot post /edit/:id */
+/* POST Lot update /edit/:id */
 router.post('/edit/:id',(req, res) => {
     const id = req.params.id;
     const lot = [req.body.NomBoutique, req.body.Maison, req.body.Description, req.body.Livraison, id];
@@ -35,6 +35,21 @@ router.post('/edit/:id',(req, res) => {
         if (err) {
             console.error('Problème lors de la mise à jour du lot' + id);
         }
+        res.redirect("/lots");
+    });
+});
+
+/* GET create Lot /create */
+router.get('/create', (req, res) => {
+    res.render("createLot", { model: {} });
+});
+
+/* POST create Lot /create */
+router.post("/create", (req, res) => {
+    const sql = "INSERT INTO Lots (NomBoutique, Maison, Description, Livraison) VALUES (?, ?, ?, ?)";
+    const lot = [req.body.NomBoutique, req.body.Maison, req.body.Description, req.body.Livraison];
+    db.run(sql, lot, err => {
+        // if (err) ...
         res.redirect("/lots");
     });
 });
