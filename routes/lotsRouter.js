@@ -55,8 +55,6 @@ router.get('/create', (req, res) => {
 
 /* POST create Lot /create */
 router.post("/create", async (req, res) => {
-
-
     try {
         await LotController.create(req.body.nomBoutique, req.body.maison, req.body.description, req.body.livraison);
         res.redirect("/lots");
@@ -68,22 +66,28 @@ router.post("/create", async (req, res) => {
 
 /* Get delete page Lot /delete/:id */
 router.get("/delete/:id", (req, res) => {
-    const id = req.params.id;
-    const sql = "SELECT * FROM Lots WHERE Lot_ID = ?";
-    db.get(sql, id, (err, row) => {
-        // if (err) ...
-        res.render("deleteLot", { model: row });
-    });
-});
+        try {
+            const id = req.params.id;
+            LotController.findById(id).then(row =>
+                res.render("deleteLot", { model: row })
+            );
+        } catch (err) {
+            console.error(err);
+            res.status(500).json({message: err.message});
+        }
+    }
+);
 
 /* POST delete lot /delete/:id */
-router.post("/delete/:id", (req, res) => {
+router.post("/delete/:id", async (req, res) => {
     const id = req.params.id;
-    const sql = "DELETE FROM Lots WHERE Lot_ID = ?";
-    db.run(sql, id, err => {
-        // if (err) ...
+    try {
+        await LotController.deleteLot(id);
         res.redirect("/lots");
-    });
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({message: err.message});
+    }
 });
 
 module.exports = router;

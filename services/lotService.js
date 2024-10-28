@@ -1,3 +1,4 @@
+const {where} = require("sequelize");
 const Lot = require('./../models/index').Lot;
 
 const LotService = {
@@ -26,6 +27,14 @@ const LotService = {
                     id: id
                 },
             });
+    },
+
+    delete(id) {
+        return Lot.destroy({
+            where: {
+                id: id
+            },
+        });
     }
 }
 

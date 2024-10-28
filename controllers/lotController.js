@@ -17,9 +17,14 @@ const update = (lot, id) => {
     return LotService.update(lot, id);
 }
 
+const deleteLot = (id) => {
+    return LotService.delete(id);
+}
+
 module.exports = {
     findAll,
     findById,
     create,
-    update
+    update,
+    deleteLot
 }
