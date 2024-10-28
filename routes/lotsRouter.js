@@ -1,28 +1,41 @@
 const express = require('express');
 const router = express.Router();
 const LotController = require('./../controllers/lotController');
+const LotService = require("../services/lotService");
 
 /* GET page "Lots" */
-router.get('/', LotController.findAll);
+router.get('/', (async (req, res) => {
+        try {
+            const lots = await LotController.findAll();
+            res.render("lots", {model: lots})
+        } catch (err) {
+            console.error(err);
+            res.status(500).json({message: err.message});
+        }
+    })
+);
 
 
 /* GET /edit/:id */
 router.get('/edit/:id',(req, res) => {
-        const id = req.params.id;
-        const sql = "SELECT * FROM Lots WHERE Lot_ID = ?";
-        db.get(sql, id, (err, row) => {
-            if (err) {
-                return console.error(err.message);
-            }
-            res.render("editLot", { model: row });
-        });
+        try {
+            const id = req.params.id;
+            LotController.findById(id).then(row =>
+                res.render("editLot", { model: row })
+            );
+        } catch (err) {
+            console.error(err);
+            res.status(500).json({message: err.message});
+        }
+
     }
 );
 
 /* POST Lot update /edit/:id */
 router.post('/edit/:id',(req, res) => {
     const id = req.params.id;
-    const lot = [req.body.NomBoutique, req.body.Maison, req.body.Description, req.body.Livraison, id];
+    const lot = [req.body.nomBoutique, req.body.maison, req.body.description, req.body.livraison, id];
+    LotController.update(lot);
     const sql = "UPDATE Lots SET NomBoutique = ?, Maison = ?, Description = ?, Livraison = ? WHERE (Lot_ID = ?)";
     db.run(sql, lot, err => {
         if (err) {
