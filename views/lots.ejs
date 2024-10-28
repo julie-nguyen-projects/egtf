@@ -18,10 +18,10 @@
         <tbody>
         <% for (const lot of model) { %>
             <tr>
-                <td><%= lot.NomBoutique %></td>
-                <td><%= lot.Description %></td>
-                <td><%= lot.Maison %></td>
-                <td><%= lot.Livraison %></td>
+                <td><%= lot.nomBoutique %></td>
+                <td><%= lot.description %></td>
+                <td><%= lot.maison %></td>
+                <td><%= lot.livraison %></td>
                 <td class="d-print-none">
                     <a class="btn btn-sm btn-warning" href="/lots/edit/<%= lot.Lot_ID %>">Modifier</a>
                     <a class="btn btn-sm btn-danger" href="/lots/delete/<%= lot.Lot_ID %>">Effacer</a>
