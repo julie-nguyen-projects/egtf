@@ -6,10 +6,3 @@ body {
 a {
   color: #00B7FF;
 }
-
-footer {
-  position: fixed;
-  height: 100px;
-  bottom: 0;
-  width: 100%;
-}
