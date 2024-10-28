@@ -26,12 +26,14 @@ const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
 const aboutRouter = require('./routes/about');
 const lotsRouter = require('./routes/lotsRouter');
+const csvScriptsRouter = require('./routes/csvScriptRouter');
 
 /** USE FOR ROUTES **/
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/about', aboutRouter);
 app.use('/lots', lotsRouter);
+app.use('/csvScripts', csvScriptsRouter);
 
 
 /** DATABASE **/

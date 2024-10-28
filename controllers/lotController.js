@@ -1,5 +1,4 @@
 const LotService = require('../services/lotService');
-const {Lot} = require("../models");
 
 const findAll = () => {
        return LotService.findALl();

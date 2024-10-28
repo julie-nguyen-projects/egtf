@@ -1,5 +1,7 @@
 const Lot = require('./lot');
+const Eleve = require('./eleve');
 
 module.exports = {
-    Lot : Lot
+    Lot : Lot,
+    Eleve: Eleve
 }
