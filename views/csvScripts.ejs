@@ -1,0 +1,33 @@
+<%- include("_header") -%>
+<div class="container">
+    <h1>Ajout de données via des fichiers .csv</h1>
+
+    <div class="table-responsive-sm">
+        <table class="table table-hover">
+            <thead>
+            <tr>
+                <th>Action</th>
+                <th>Fichier</th>
+            </tr>
+            </thead>
+            <tbody>
+
+            <!-- LOTS -->
+            <tr>
+                <td>Ajouter les lots</td>
+                <td><form action="/csvScripts/addLots" method="post">
+                        <div class="form-group">
+                            <input type="file" class="form-control-file" id="csvLots">
+                        </div>
+                    </form></td>
+            </tr>
+
+
+            </tbody>
+        </table>
+    </div>
+
+</div>
+
+
+<%- include("_footer") -%>

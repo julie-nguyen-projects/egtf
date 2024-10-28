@@ -1,35 +1,36 @@
 <%- include("_header") -%>
+<div class="container">
+    <h1>Liste des lots (<%= model.length %>)</h1>
 
-<h1>Liste des lots (<%= model.length %>)</h1>
-
-<div class="table-responsive-sm">
-    <table class="table table-hover">
-        <thead>
-        <tr>
-            <th>Nom de la Boutique</th>
-            <th>Description du lot</th>
-            <th>Maison</th>
-            <th>Livraison</th>
-            <th class="d-print-none">
-                <a class="btn btn-sm btn-success" href="/lots/create">Ajouter</a>
-            </th>
-        </tr>
-        </thead>
-        <tbody>
-        <% for (const lot of model) { %>
+    <div class="table-responsive-sm">
+        <table class="table table-hover">
+            <thead>
             <tr>
-                <td><%= lot.nomBoutique %></td>
-                <td><%= lot.description %></td>
-                <td><%= lot.maison %></td>
-                <td><%= lot.livraison %></td>
-                <td class="d-print-none">
-                    <a class="btn btn-sm btn-warning" href="/lots/edit/<%= lot.id %>">Modifier</a>
-                    <a class="btn btn-sm btn-danger" href="/lots/delete/<%= lot.id %>">Effacer</a>
-                </td>
+                <th>Nom de la Boutique</th>
+                <th>Description du lot</th>
+                <th>Maison</th>
+                <th>Livraison</th>
+                <th class="d-print-none">
+                    <a class="btn btn-sm btn-success" href="/lots/create">Ajouter</a>
+                </th>
             </tr>
-        <% } %>
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+            <% for (const lot of model) { %>
+                <tr>
+                    <td><%= lot.nomBoutique %></td>
+                    <td><%= lot.description %></td>
+                    <td><%= lot.maison %></td>
+                    <td><%= lot.livraison %></td>
+                    <td class="d-print-none">
+                        <a class="btn btn-sm btn-warning" href="/lots/edit/<%= lot.id %>">Modifier</a>
+                        <a class="btn btn-sm btn-danger" href="/lots/delete/<%= lot.id %>">Effacer</a>
+                    </td>
+                </tr>
+            <% } %>
+            </tbody>
+        </table>
+    </div>
 </div>
 
 <%- include("_footer") -%>
