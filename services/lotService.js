@@ -5,9 +5,28 @@ const LotService = {
         return Lot.findAll();
     },
     findById(id) {
-         return  Lot.findByPk(id);
-    }
+        return  Lot.findByPk(id);
+    },
 
+    create(nomBoutique, maison, description, livraison) {
+        let newLot = {nomBoutique: nomBoutique, maison: maison, description: description, livraison: livraison};
+        return Lot.create(newLot);
+    },
+
+    update(lot, id ) {
+        Lot.update({
+                nomBoutique : lot.nomBoutique ,
+                description: lot.description ,
+                maison: lot.maison ,
+                livraison: lot.livraison
+            }
+            ,
+            {
+                where: {
+                    id: id
+                },
+            });
+    }
 }
 
 module.exports = LotService;

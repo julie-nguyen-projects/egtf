@@ -1,7 +1,6 @@
 const express = require('express');
 const router = express.Router();
 const LotController = require('./../controllers/lotController');
-const LotService = require("../services/lotService");
 
 /* GET page "Lots" */
 router.get('/', (async (req, res) => {
@@ -27,22 +26,26 @@ router.get('/edit/:id',(req, res) => {
             console.error(err);
             res.status(500).json({message: err.message});
         }
-
     }
 );
 
 /* POST Lot update /edit/:id */
-router.post('/edit/:id',(req, res) => {
+router.post('/edit/:id',async (req, res) => {
     const id = req.params.id;
-    const lot = [req.body.nomBoutique, req.body.maison, req.body.description, req.body.livraison, id];
-    LotController.update(lot);
-    const sql = "UPDATE Lots SET NomBoutique = ?, Maison = ?, Description = ?, Livraison = ? WHERE (Lot_ID = ?)";
-    db.run(sql, lot, err => {
-        if (err) {
-            console.error('Problème lors de la mise à jour du lot' + id);
-        }
-        res.redirect("/lots");
-    });
+    const lot = {
+        'nomBoutique': req.body.nomBoutique,
+        'maison': req.body.maison,
+        'description': req.body.description,
+        'livraison': req.body.livraison
+    };
+    try {
+        await LotController.update(lot, id);
+        res.redirect("/lots")
+
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({message: err.message});
+    }
 });
 
 /* GET create page Lot /create */
@@ -51,13 +54,16 @@ router.get('/create', (req, res) => {
 });
 
 /* POST create Lot /create */
-router.post("/create", (req, res) => {
-    const sql = "INSERT INTO Lots (NomBoutique, Maison, Description, Livraison) VALUES (?, ?, ?, ?)";
-    const lot = [req.body.NomBoutique, req.body.Maison, req.body.Description, req.body.Livraison];
-    db.run(sql, lot, err => {
-        // if (err) ...
+router.post("/create", async (req, res) => {
+
+
+    try {
+        await LotController.create(req.body.nomBoutique, req.body.maison, req.body.description, req.body.livraison);
         res.redirect("/lots");
-    });
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({message: err.message});
+    }
 });
 
 /* Get delete page Lot /delete/:id */

@@ -3,7 +3,7 @@ const { DataTypes, Sequelize } = require('sequelize')
 
 const Lot = sequelize.define('Lot', {
         id: {
-            field: 'Lot_ID',
+            field: 'id',
             type: DataTypes.INTEGER,
             allowNull: false,
             unique: true,
@@ -11,24 +11,20 @@ const Lot = sequelize.define('Lot', {
             autoIncrement: true,
         },
         nomBoutique: {
-            field: 'NomBoutique',
+            field: 'nomBoutique',
             type: DataTypes.STRING,
-            allowNull: false
         },
         livraison: {
-            field: 'Livraison',
+            field: 'livraison',
             type: DataTypes.STRING,
-            allowNull: false
         },
         maison: {
-            field: 'Maison',
+            field: 'maison',
             type: DataTypes.STRING,
-            allowNull: false
         },
         description: {
-            field: 'Description',
+            field: 'description',
             type: DataTypes.STRING,
-            allowNull: false
         }
     }
     ,{
