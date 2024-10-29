@@ -23,7 +23,7 @@
 ## Si vous développez seule sur NouvelleBranche
 - TOUS LES JOURS, merci de vérifier que vous êtes à jour avec master (git fetch), PUIS rebase sur votre branche. Résolvez les éventuels conflits
 
-## Quand le dév est fini
+## Quand le développement est fini
 - Quand c'est fini, merci de vérifier que vous êtes à jour avec master (git fetch), PUIS rebase sur votre branche. Résolvez les éventuels conflits
 - Merci d'utiliser l'interface de github pour faire une Pull Request (de préférence je préfère les accepter moi-même)
 - ATTENTION, si vous acceptez une PR, merci d'utiliser l'option de REBASE plutôt que le MERGE
