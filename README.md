@@ -8,6 +8,10 @@
 - http://localhost:3000/
 
 # Développer une feature avec GIT
+## Commandes de bases de GIT
+- https://www.atlassian.com/git/glossary#commands
+
+## Étapes à suivre
 - Se mettre sur la branche master
 - Vérifier qu'on est à jour (git pull)
 - Checkout vers une nouvelle branche (git checkout NouvelleBranche)
