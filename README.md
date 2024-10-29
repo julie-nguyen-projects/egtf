@@ -1,4 +1,4 @@
-# Pour lancer le projet en local 
+# Lancer le projet en local 
 - installer la dernière version stable de node https://nodejs.org/en/download/package-manager (LTS)
 - cloner ce repo
 > npm install
