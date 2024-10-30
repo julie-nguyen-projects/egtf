@@ -2,11 +2,14 @@ const express = require('express');
 const router = express.Router();
 const LotController = require('../controllers/lotController');
 
+let show_modal = false; // modal de suppression
+
 /* GET page "Lots" */
 router.get('/', (async (req, res) => {
+
         try {
             const lots = await LotController.findAll();
-            res.render("lots", {model: lots})
+            res.render("lots", {model: lots, show_modal: req.body.modal})
         } catch (err) {
             console.error(err);
             res.status(500).json({message: err.message});
@@ -90,5 +93,19 @@ router.post("/delete/:id", async (req, res) => {
         res.status(500).json({message: err.message});
     }
 });
+
+/**
+ * Delete all Lots
+ */
+router.get("/deleteAll", (req, res) => {
+    res.render('deleteAll');
+});
+
+
+router.post("/deleteAll", async (req, res) => {
+    await LotController.deleteAll();
+    res.redirect('/lots')
+});
+
 
 module.exports = router;
