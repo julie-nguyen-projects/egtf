@@ -1,10 +1,15 @@
 {
   "name": "engeektonfilinterface",
-  "version": "0.0.0",
-  "private": true,
+  "version": "1.0.0",
+  "description": "Interface d'administration pour l'association En Geek Ton Fil",
+  "main": "app.js",
   "scripts": {
-    "start": "node ./bin/www"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app.js",
+    "lint": "eslint src/"
   },
+  "author": "Julie DELEGLISE",
+  "license": "ISC",
   "dependencies": {
     "bootstrap": "^5.3.3",
     "cookie-parser": "~1.4.4",
@@ -15,7 +20,11 @@
     "http-errors": "~1.6.3",
     "morgan": "~1.9.1",
     "multer": "^1.4.5-lts.1",
-    "sequelize": "^6.37.4",
-    "sqlite3": "^5.1.7"
+    "sequelize": "^6.37.4"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.13.0",
+    "eslint": "^9.13.0",
+    "globals": "^15.11.0"
   }
 }

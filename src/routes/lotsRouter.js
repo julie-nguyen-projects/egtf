@@ -2,8 +2,6 @@ const express = require('express');
 const router = express.Router();
 const LotController = require('../controllers/lotController');
 
-let show_modal = false; // modal de suppression
-
 /* GET page "Lots" */
 router.get('/', (async (req, res) => {
 

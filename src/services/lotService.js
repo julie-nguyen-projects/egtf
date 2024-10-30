@@ -1,4 +1,3 @@
-const {where} = require("sequelize");
 const Lot = require('../models').Lot;
 
 const LotService = {

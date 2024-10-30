@@ -28,7 +28,7 @@ router.get('/', (req, res) => {
 /**
  * POST ajout de lots
  */
-router.post("/addLots", upload.single('file'), function (req, res, next) {
+router.post("/addLots", upload.single('file'), function (req, res) {
     try {
         csvScriptController.addLotsFromCsvFile(req.file);
 
