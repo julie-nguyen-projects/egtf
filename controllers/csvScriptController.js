@@ -1,7 +1,7 @@
-const uploadFileService = require('../services/uploadFileService');
+const csvScriptService = require('../services/csvScriptService');
 
 const addLotsFromCsvFile = (file) => {
-    uploadFileService.addLotsFromCsvFile(file);
+    csvScriptService.addLotsFromCsvFile(file);
 }
 
 module.exports = {
