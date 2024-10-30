@@ -11,7 +11,12 @@ const port = 3000;
 const app = express();
 
 /** VIEW ENGINE SETUP **/
-app.set('views', path.join(__dirname, 'views'));
+app.set('views', [
+    path.join(__dirname, 'views'),
+    path.join(__dirname, 'views/lots'),
+    path.join(__dirname, 'views/csvScripts'),
+    path.join(__dirname, 'views/templates'),
+]);
 app.set('view engine', 'ejs');
 
 app.use(logger('dev'));
