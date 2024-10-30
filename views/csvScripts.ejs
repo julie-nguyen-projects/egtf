@@ -6,8 +6,9 @@
         <table class="table table-hover">
             <thead>
             <tr>
-                <th>Action</th>
+                <th>Type d'action</th>
                 <th>Fichier</th>
+                <th>Exécuter l'action</th>
             </tr>
             </thead>
             <tbody>
@@ -15,11 +16,16 @@
             <!-- LOTS -->
             <tr>
                 <td>Ajouter les lots</td>
-                <td><form action="/csvScripts/addLots" method="post">
+                <form action="/csvScripts/addLots" method="post" enctype="multipart/form-data">
+                <td>
                         <div class="form-group">
-                            <input type="file" class="form-control-file" id="csvLots">
+                            <input type="file" class="form-control-file" id="file" name="file">
                         </div>
-                    </form></td>
+                    </td>
+                    <td>
+                        <input class="btn btn-success" type="submit" value="Ajouter des lots">
+                    </td>
+                </form>
             </tr>
 
 
