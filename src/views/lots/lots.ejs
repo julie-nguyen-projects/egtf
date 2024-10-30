@@ -13,7 +13,7 @@
                     <th class="col-md-2">Description du lot</th>
                     <th class="col-md-2">Maison</th>
                     <th class="col-md-2">Livraison</th>
-                    <th class="col-md-2 text-bg-info p-3">Gagnant.e</th>
+                    <th class="col-md-2">Gagnant.e</th>
                     <th class="col-md-2">
                         <a class="btn btn-sm btn-success w-100" href="/lots/create">Ajouter</a>
                     </th>
@@ -26,7 +26,7 @@
                         <td class="col-md-2"><%= lot.description %></td>
                         <td class="col-md-2"><%= lot.maison %></td>
                         <td class="col-md-2"><%= lot.livraison %></td>
-                        <td class="col-md-2 text-bg-info p-3"><%= lot.gagnant_e %></td>
+                        <td class="col-md-2"><%= lot.gagnant_e %></td>
                         <td class="col-md-2">
                             <a class="btn btn-sm btn-warning w-45" href="/lots/edit/<%= lot.id %>">Modifier</a>
                             <a class="btn btn-sm btn-danger w-45" href="/lots/delete/<%= lot.id %>">Effacer</a>
