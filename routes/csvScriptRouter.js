@@ -3,7 +3,10 @@ const router = express.Router();
 const csvScriptController = require('./../controllers/csvScriptController');
 const multer = require("multer");
 
-/* Multer Configuration */
+/**
+ * Multer configuration
+ * @type {DiskStorage}
+ */
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
         cb(null, 'uploads/');
@@ -15,12 +18,16 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage });
 
-/* GET csv scripts page */
+/**
+ * GET csv scripts page
+ */
 router.get('/', (req, res) => {
     res.render('csvScripts');
 });
 
-/* POST ajout de lots */
+/**
+ * POST ajout de lots
+ */
 router.post("/addLots", upload.single('file'), function (req, res, next) {
     try {
         csvScriptController.addLotsFromCsvFile(req.file);
