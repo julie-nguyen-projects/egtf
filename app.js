@@ -12,10 +12,10 @@ const app = express();
 
 /** VIEW ENGINE SETUP **/
 app.set('views', [
-    path.join(__dirname, 'views'),
-    path.join(__dirname, 'views/lots'),
-    path.join(__dirname, 'views/csvScripts'),
-    path.join(__dirname, 'views/templates'),
+    path.join(__dirname, 'src/views'),
+    path.join(__dirname, 'src/views/lots'),
+    path.join(__dirname, 'src/views/csvScripts'),
+    path.join(__dirname, 'src/views/templates'),
 ]);
 app.set('view engine', 'ejs');
 
@@ -27,11 +27,11 @@ app.use(bodyParser.json())
 app.use(express.static(path.join(__dirname, 'public')));
 
 /** ROUTES **/
-const indexRouter = require('./routes/index');
-const usersRouter = require('./routes/users');
-const aboutRouter = require('./routes/about');
-const lotsRouter = require('./routes/lotsRouter');
-const csvScriptsRouter = require('./routes/csvScriptRouter');
+const indexRouter = require('./src/routes/index');
+const usersRouter = require('./src/routes/users');
+const aboutRouter = require('./src/routes/about');
+const lotsRouter = require('./src/routes/lotsRouter');
+const csvScriptsRouter = require('./src/routes/csvScriptRouter');
 
 /** USE FOR ROUTES **/
 app.use('/', indexRouter);

@@ -1,0 +1,42 @@
+<%- include("_header") -%>
+
+<div class="album py-5 bg-light">
+    <div class="container">
+        <h1>Liste des lots (<%= model.length %>)</h1>
+        <button type="button" class="btn btn-outline-success btn-lg btn-block">Tirage au sort</button>
+
+        <div class="table-responsive-sm">
+            <table class="table table-hover">
+                <thead>
+                <tr class="row">
+                    <th class="col-md-2">Nom de la Boutique</th>
+                    <th class="col-md-2">Description du lot</th>
+                    <th class="col-md-2">Maison</th>
+                    <th class="col-md-2">Livraison</th>
+                    <th class="col-md-2 text-bg-info p-3">Gagnant.e</th>
+                    <th class="col-md-2">
+                        <a class="btn btn-sm btn-success w-100" href="/lots/create">Ajouter</a>
+                    </th>
+                </tr>
+                </thead>
+                <tbody>
+                <% for (const lot of model) { %>
+                    <tr class="row">
+                        <td class="col-md-2"><%= lot.nomBoutique %></td>
+                        <td class="col-md-2"><%= lot.description %></td>
+                        <td class="col-md-2"><%= lot.maison %></td>
+                        <td class="col-md-2"><%= lot.livraison %></td>
+                        <td class="col-md-2 text-bg-info p-3"><%= lot.gagnant_e %></td>
+                        <td class="col-md-2">
+                            <a class="btn btn-sm btn-warning w-45" href="/lots/edit/<%= lot.id %>">Modifier</a>
+                            <a class="btn btn-sm btn-danger w-45" href="/lots/delete/<%= lot.id %>">Effacer</a>
+                        </td>
+                    </tr>
+                <% } %>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<%- include("_footer") -%>

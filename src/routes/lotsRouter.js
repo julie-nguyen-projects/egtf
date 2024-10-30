@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const LotController = require('./../controllers/lotController');
+const LotController = require('../controllers/lotController');
 
 /* GET page "Lots" */
 router.get('/', (async (req, res) => {
@@ -36,7 +36,8 @@ router.post('/edit/:id',async (req, res) => {
         'nomBoutique': req.body.nomBoutique,
         'maison': req.body.maison,
         'description': req.body.description,
-        'livraison': req.body.livraison
+        'livraison': req.body.livraison,
+        'gagnant_e': req.body.gagnant_e
     };
     try {
         await LotController.update(lot, id);
