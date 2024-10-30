@@ -1,5 +1,5 @@
 const {where} = require("sequelize");
-const Lot = require('./../models/index').Lot;
+const Lot = require('../models').Lot;
 
 const LotService = {
     findALl: () => {
@@ -14,12 +14,24 @@ const LotService = {
         return Lot.create(newLot);
     },
 
+    createWithCompleteFields(nomBoutique, maison, description, livraison, physique) {
+        let newLot = {
+            nomBoutique: nomBoutique,
+            maison: maison,
+            description: description,
+            livraison: livraison,
+            physique: physique
+        };
+        return Lot.create(newLot);
+    },
+
     update(lot, id ) {
         Lot.update({
                 nomBoutique : lot.nomBoutique ,
                 description: lot.description ,
                 maison: lot.maison ,
-                livraison: lot.livraison
+                livraison: lot.livraison,
+                gagnant_e: lot.gagnant_e
             }
             ,
             {

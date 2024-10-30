@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const csvScriptController = require('./../controllers/csvScriptController');
+const csvScriptController = require('../controllers/csvScriptController');
 const multer = require("multer");
 
 /**
