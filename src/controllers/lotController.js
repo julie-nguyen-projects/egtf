@@ -20,6 +20,10 @@ const LotController = {
     deleteLot: (id) => {
         return LotService.delete(id);
     },
+
+    deleteAll: () => {
+        return LotService.deleteAll();
+    }
 }
 
 module.exports = LotController;

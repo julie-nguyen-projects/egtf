@@ -3,8 +3,11 @@ const Lot = require('../models').Lot;
 
 const LotService = {
     findALl: () => {
-        return Lot.findAll();
+        return Lot.findAll({order:
+                [['nomBoutique','ASC']]
+        });
     },
+
     findById(id) {
         return  Lot.findByPk(id);
     },
@@ -47,7 +50,11 @@ const LotService = {
                 id: id
             },
         });
-    }
+    },
+
+    deleteAll() {
+        return Lot.truncate();
+    },
 }
 
 module.exports = LotService;
