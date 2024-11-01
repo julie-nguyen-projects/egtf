@@ -2,4 +2,6 @@
 deployment:
   tasks:
     - export DEPLOYPATH=/home2/sc1deke1575/egtf/
-    - /bin/cp -R * $DEPLOYPATH
+    - /bin/cp -R src $DEPLOYPATH
+    - npm i
+    - npm run build
