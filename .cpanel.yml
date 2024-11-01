@@ -1,0 +1,5 @@
+---
+deployment:
+  tasks:
+    - export DEPLOYPATH=/home2/sc1deke1575/repositories/egtf/
+    - /bin/cp -R images $DEPLOYPATH
