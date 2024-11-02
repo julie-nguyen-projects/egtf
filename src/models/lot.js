@@ -1,4 +1,4 @@
-const sequelize = require('../../database')
+const sequelize = require('./../../config').sequelize;
 const { DataTypes } = require('sequelize')
 
 const Lot = sequelize.define('Lot', {
