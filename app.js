@@ -5,9 +5,11 @@ const bodyParser = require('body-parser');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
-const sequelize = require('./database');
+const config= require('./config').config;
+const sequelize= require('./config').sequelize;
 
-const port = 3000;
+const port = process.env.NODE_ENV === 'production' ? config.production.port : config.development.port;
+
 const app = express();
 
 /** VIEW ENGINE SETUP **/
@@ -42,17 +44,25 @@ app.use('/csvScripts', csvScriptsRouter);
 
 
 /** DATABASE **/
-sequelize.authenticate().then(async () => {
-  console.log('Connection to database has been established successfully.');
-  await sequelize.sync();
-  console.log('All models were successfully synchronized.')
-}).catch((error) => {
-  console.error('Unable to connect to the database: ', error);
-});
+sequelize.sync()
+    .then(() => {
+        console.log('Connexion à la base de données réussie !');
+    })
+    .catch(err => {
+        console.error('Impossible de se connecter à la base de données :', err);
+    });
 
 /** APP LAUNCH **/
 app.listen(port, () => {
   console.log(`Server listening on port ${port}`);
+
+    console.log(`Utilisation de la configuration pour l'environnement: ${process.env.NODE_ENV}`);
+    console.log({
+        host: config[process.env.NODE_ENV || 'development'].host,
+        database: config[process.env.NODE_ENV || 'development'].database,
+        username: config[process.env.NODE_ENV || 'development'].username,
+        password: config[process.env.NODE_ENV || 'development'].password,
+    });
 });
 
 
