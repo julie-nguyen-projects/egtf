@@ -1,13 +1,14 @@
 const express = require('express');
 const router = express.Router();
-const LotController = require('../controllers/lotController');
+const EleveController = require('../controllers/eleveController');
 
-/* GET page "Lots" */
+/**
+ * Get page Eleves
+ */
 router.get('/', (async (req, res) => {
-
         try {
-            const lots = await LotController.findAll();
-            res.render("lots", {model: lots})
+            const eleves = await EleveController.findAll();
+            res.render("eleves", {eleves: eleves})
         } catch (err) {
             console.error(err);
             res.status(500).json({message: err.message});
@@ -15,13 +16,14 @@ router.get('/', (async (req, res) => {
     })
 );
 
-
-/* GET /edit/:id */
+/**
+ * GET /edit/:id
+ */
 router.get('/edit/:id',(req, res) => {
         try {
             const id = req.params.id;
-            LotController.findById(id).then(row =>
-                res.render("editLot", { model: row })
+            EleveController.findById(id).then(row =>
+                res.render("editEleve", { eleve: row })
             );
         } catch (err) {
             console.error(err);
@@ -30,62 +32,51 @@ router.get('/edit/:id',(req, res) => {
     }
 );
 
-/* POST Lot update /edit/:id */
+/**
+ *  POST Eleve update /edit/:id
+ */
 router.post('/edit/:id',async (req, res) => {
     const id = req.params.id;
-    const lot = {
-        'nomBoutique': req.body.nomBoutique,
+    const eleve = {
+        'pseudoDiscord': req.body.pseudoDiscord,
         'maison': req.body.maison,
-        'description': req.body.description,
-        'livraison': req.body.livraison,
-        'gagnant_e': req.body.gagnant_e
+        'zoneLivraison': req.body.zoneLivraison,
+        'idDiscord': req.body.idDiscord
+    };
+    console.log(eleve)
+    try {
+        await EleveController.update(eleve, id);
+        res.redirect("/eleves")
+
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({message: err.message});
+    }
+});
+
+
+/**
+ * GET create page Eleve /create
+ */
+router.get('/create', (req, res) => {
+    res.render("createEleve", { eleve: {} });
+});
+
+
+/**
+ * POST create Eleve /create
+ */
+router.post("/create", async (req, res) => {
+    const eleve = {
+        'pseudoDiscord': req.body.pseudoDiscord,
+        'maison': req.body.maison,
+        'zoneLivraison': req.body.zoneLivraison,
+        'idDiscord': req.body.idDiscord
     };
     try {
-        await LotController.update(lot, id);
-        res.redirect("/lots")
-
-    } catch (err) {
-        console.error(err);
-        res.status(500).json({message: err.message});
-    }
-});
-
-/* GET create page Lot /create */
-router.get('/create', (req, res) => {
-    res.render("createLot", { model: {} });
-});
-
-/* POST create Lot /create */
-router.post("/create", async (req, res) => {
-    try {
-        await LotController.create(req.body.nomBoutique, req.body.maison, req.body.description, req.body.livraison);
-        res.redirect("/lots");
-    } catch (err) {
-        console.error(err);
-        res.status(500).json({message: err.message});
-    }
-});
-
-/* Get delete page Lot /delete/:id */
-router.get("/delete/:id", (req, res) => {
-        try {
-            const id = req.params.id;
-            LotController.findById(id).then(row =>
-                res.render("deleteLot", { model: row })
-            );
-        } catch (err) {
-            console.error(err);
-            res.status(500).json({message: err.message});
-        }
-    }
-);
-
-/* POST delete lot /delete/:id */
-router.post("/delete/:id", async (req, res) => {
-    const id = req.params.id;
-    try {
-        await LotController.deleteLot(id);
-        res.redirect("/lots");
+        console.log(req)
+        await EleveController.create(eleve);
+        res.redirect("/eleves");
     } catch (err) {
         console.error(err);
         res.status(500).json({message: err.message});
@@ -93,16 +84,33 @@ router.post("/delete/:id", async (req, res) => {
 });
 
 /**
- * Delete all Lots
+ * Get delete page Eleve /delete/:id
  */
-router.get("/deleteAll", (req, res) => {
-    res.render('deleteAll');
-});
+router.get("/delete/:id", (req, res) => {
+        try {
+            const id = req.params.id;
+            EleveController.findById(id).then(row =>
+                res.render("deleteEleve", { eleve: row })
+            );
+        } catch (err) {
+            console.error(err);
+            res.status(500).json({message: err.message});
+        }
+    }
+);
 
-
-router.post("/deleteAll", async (req, res) => {
-    await LotController.deleteAll();
-    res.redirect('/lots')
+/**
+ * POST delete Eleve /delete/:id
+ */
+router.post("/delete/:id", async (req, res) => {
+    const id = req.params.id;
+    try {
+        await EleveController.deleteEleve(id);
+        res.redirect("/eleves");
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({message: err.message});
+    }
 });
 
 

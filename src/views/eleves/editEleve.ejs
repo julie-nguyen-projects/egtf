@@ -1,0 +1,21 @@
+<%- include("_header") -%>
+<div class="container">
+    <h1>Modifier un.e élève</h1>
+
+    <form action="/eleves/edit/<%= eleve.id %>" method="post">
+        <div class="form-horizontal">
+
+            <%- include("_editorEleve") -%>
+
+            <div class="form-group row">
+                <label class="col-form-label col-sm-2"></label>
+                <div class="col-sm-10">
+                    <input type="submit" value="Modifier" class="btn btn-default btn-warning" />
+                    <a class="btn btn-outline-dark cancel" href="/eleves">Annuler</a>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+<%- include("_footer") -%>

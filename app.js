@@ -16,6 +16,7 @@ const app = express();
 app.set('views', [
     path.join(__dirname, 'src/views'),
     path.join(__dirname, 'src/views/lots'),
+    path.join(__dirname, 'src/views/eleves'),
     path.join(__dirname, 'src/views/csvScripts'),
     path.join(__dirname, 'src/views/templates'),
 ]);
@@ -33,6 +34,7 @@ const indexRouter = require('./src/routes/index');
 const usersRouter = require('./src/routes/users');
 const aboutRouter = require('./src/routes/about');
 const lotsRouter = require('./src/routes/lotsRouter');
+const elevesRouter = require('./src/routes/elevesRouter');
 const csvScriptsRouter = require('./src/routes/csvScriptRouter');
 
 /** USE FOR ROUTES **/
@@ -40,6 +42,7 @@ app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/about', aboutRouter);
 app.use('/lots', lotsRouter);
+app.use('/eleves', elevesRouter);
 app.use('/csvScripts', csvScriptsRouter);
 
 
