@@ -17,13 +17,36 @@
             <tr>
                 <td>Ajouter les lots</td>
                 <form action="/csvScripts/addLots" method="post" enctype="multipart/form-data">
-                <td>
+                    <td>
                         <div class="form-group">
                             <input type="file" class="form-control-file" id="file" name="file">
                         </div>
                     </td>
                     <td>
-                        <input class="btn btn-success" type="submit" value="Ajouter des lots">
+                        <% if(areThereLots){ %>
+                            <p>Il y a déjà des lots dans la base de données</p>
+                        <%} else{ %>
+                            <input class="btn btn-success" type="submit" value="Ajouter des lots">
+                        <% } %>
+                    </td>
+                </form>
+            </tr>
+
+            <!-- ÉLÈVES -->
+            <tr>
+                <td>Ajouter les élèves</td>
+                <form action="/csvScripts/addEleves" method="post" enctype="multipart/form-data">
+                    <td>
+                        <div class="form-group">
+                            <input type="file" class="form-control-file" id="file" name="file">
+                        </div>
+                    </td>
+                    <td>
+                        <% if(areThereEleves){ %>
+                            <p>Il y a déjà des élèves dans la base de données</p>
+                        <%} else{ %>
+                            <input class="btn btn-success" type="submit" value="Ajouter des élèves">
+                        <% } %>
                     </td>
                 </form>
             </tr>
