@@ -1,0 +1,50 @@
+<%- include("_header") -%>
+
+<div class="album py-5">
+    <div class="container">
+        <div>
+            <h1>Liste des élèves (<%= eleves.length %>)</h1>
+        </div>
+        <div class="table table-responsive-sm">
+            <table class="table table-hover">
+                <thead>
+                <tr class="row">
+                    <th class="col-sm">Pseudo Discord</th>
+                    <th class="col-sm">Maison</th>
+                    <th class="col-sm">Zone de livraison</th>
+                    <th class="col-sm">Id Discord</th>
+                    <th class="col-lg-3">
+                        <a class="btn btn-sm btn-success w-100" href="/eleves/create">Ajouter un.e élève</a>
+                    </th>
+                </tr>
+                </thead>
+                <tbody>
+                </tbody>
+                <% for (const eleve of eleves) { %>
+                    <tr class="row">
+                        <td class="col-sm"><%= eleve.pseudoDiscord %></td>
+                        <td class="col-sm"><%= eleve.maison %></td>
+                        <td class="col-sm"><%= eleve.zoneLivraison %></td>
+                        <td class="col-sm"><%= eleve.idDiscord %></td>
+                        <td class="col-lg-3">
+                            <div class="w-100 row">
+                                <div class="w-50">
+                                    <a class="btn btn-sm btn-warning w-100" href="/eleves/edit/<%= eleve.id %>">Modifier</a>
+                                </div>
+                                <div class="w-50">
+                                    <a class="btn btn-sm btn-danger w-100" href="/eleves/delete/<%= eleve.id %>">Effacer</a>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                <% } %>
+            </table>
+        </div>
+    </div>
+
+</div>
+
+
+
+
+<%- include("_footer") -%>
