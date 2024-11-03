@@ -12,7 +12,6 @@ const EleveService = {
     },
 
     create(eleve) {
-        console.log(eleve)
         return Eleve.create(eleve);
     },
 
@@ -39,6 +38,17 @@ const EleveService = {
         });
     },
 
+    createEleveFromCsvFile(pseudoComplet, zoneLivraison, maison) {
+        let [ idDiscord, pseudoDiscord ] = pseudoComplet.substring(1).split(')');
+        let eleve = {
+            pseudoDiscord: pseudoDiscord,
+            idDiscord: idDiscord,
+            maison: maison,
+            zoneLivraison: zoneLivraison
+        }
+        return Eleve.create(eleve);
+        
+    }
 }
 
 module.exports = EleveService;
