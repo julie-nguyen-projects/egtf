@@ -19,6 +19,7 @@ app.set('views', [
     path.join(__dirname, 'src/views/eleves'),
     path.join(__dirname, 'src/views/csvScripts'),
     path.join(__dirname, 'src/views/templates'),
+    path.join(__dirname, 'src/views/tirage'),
 ]);
 app.set('view engine', 'ejs');
 
@@ -36,6 +37,7 @@ const aboutRouter = require('./src/routes/about');
 const lotsRouter = require('./src/routes/lotsRouter');
 const elevesRouter = require('./src/routes/elevesRouter');
 const csvScriptsRouter = require('./src/routes/csvScriptRouter');
+const tirageRouter = require('./src/routes/tirageRouter');
 
 /** USE FOR ROUTES **/
 app.use('/', indexRouter);
@@ -44,6 +46,7 @@ app.use('/about', aboutRouter);
 app.use('/lots', lotsRouter);
 app.use('/eleves', elevesRouter);
 app.use('/csvScripts', csvScriptsRouter);
+app.use('/tirage', tirageRouter);
 
 
 /** DATABASE **/
