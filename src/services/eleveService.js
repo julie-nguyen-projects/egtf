@@ -48,6 +48,25 @@ const EleveService = {
         }
         return Eleve.create(eleve);
         
+    },
+
+    findByFrance() {
+        return Eleve.findAll({
+            where: {
+                zoneLivraison: 'France métropolitaine'
+
+            },
+            raw: true
+        })
+    },
+
+    async deleteAllTickets(pseudoDiscord) {
+        await Eleve.destroy({
+                where: {
+                    pseudoDiscord: pseudoDiscord
+                },
+            }
+        )
     }
 }
 

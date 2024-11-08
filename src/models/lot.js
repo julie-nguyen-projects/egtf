@@ -22,7 +22,7 @@ const Lot = sequelize.define('Lot', {
             type: DataTypes.STRING,
         },
         physique: {
-            type: DataTypes.BOOLEAN
+            type: DataTypes.STRING
         },
         gagnant_e: {
             type: DataTypes.STRING
