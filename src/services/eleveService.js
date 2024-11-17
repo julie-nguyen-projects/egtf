@@ -1,3 +1,4 @@
+const {Op} = require("sequelize");
 const Eleve = require('../models').Eleve;
 
 const EleveService = {
@@ -67,6 +68,16 @@ const EleveService = {
                 },
             }
         )
+    },
+    findByFranceOrUE() {
+        return Eleve.findAll({
+            where: {
+                zoneLivraison: {
+                    [Op.or] : ['France métropolitaine', "Pays au sein de l'Union Européenne (hors France métropolitaine)"]
+                }
+            },
+            raw: true
+        })
     }
 }
 
