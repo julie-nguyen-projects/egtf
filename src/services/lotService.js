@@ -56,16 +56,6 @@ const LotService = {
         return Lot.truncate();
     },
 
-    findByLotsPhysiques() {
-        return Lot.findAll({
-            where: {
-                physique: {
-                    [Op.eq]: 'Oui',
-                }
-            }
-        })
-    },
-
     findByPhysiqueAndFrance() {
         return Lot.findAll({
             where: {
@@ -91,7 +81,7 @@ const LotService = {
             });
     },
 
-    findByPhysiqueAndUE() {
+    findByPhysiqueFcEtUE() {
         return Lot.findAll({
             where: {
                 physique: 'Oui',
@@ -103,6 +93,31 @@ const LotService = {
             raw: true
         },)
     },
+
+    findByPhysiqueMonde() {
+        return Lot.findAll({
+            where: {
+                physique: 'Oui',
+                livraison: 'Monde',
+                gagnant_e: {
+                    [Op.or] : [null, '']
+                }
+            },
+            raw: true
+        },)
+    },
+
+    findByNonPhysique() {
+        return Lot.findAll({
+            where: {
+                physique: 'Non',
+                gagnant_e: {
+                    [Op.or] : [null, '']
+                }
+            },
+            raw: true
+        },)
+    }
 }
 
 module.exports = LotService;

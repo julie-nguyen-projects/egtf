@@ -3,9 +3,11 @@ const Eleve = require('../models').Eleve;
 
 const EleveService = {
     findALl: () => {
-        return Eleve.findAll({order:
-                [['pseudoDiscord','ASC']]
-        });
+        return Eleve.findAll({
+                order: [['pseudoDiscord','ASC']],
+                raw: true
+            },
+        )
     },
 
     findById(id) {
@@ -48,17 +50,6 @@ const EleveService = {
             zoneLivraison: zoneLivraison
         }
         return Eleve.create(eleve);
-        
-    },
-
-    findByFrance() {
-        return Eleve.findAll({
-            where: {
-                zoneLivraison: 'France métropolitaine'
-
-            },
-            raw: true
-        })
     },
 
     async deleteAllTickets(pseudoDiscord) {
@@ -69,6 +60,16 @@ const EleveService = {
             }
         )
     },
+
+    findByFrance() {
+        return Eleve.findAll({
+            where: {
+                zoneLivraison: 'France métropolitaine'
+            },
+            raw: true
+        })
+    },
+
     findByFranceOrUE() {
         return Eleve.findAll({
             where: {
@@ -78,7 +79,7 @@ const EleveService = {
             },
             raw: true
         })
-    }
+    },
 }
 
 module.exports = EleveService;

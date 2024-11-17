@@ -2,7 +2,7 @@ const TirageService = require('../services/tirageAuSortService')
 
 const TirageController = {
     async tirageLotsPhysiquesFrance() {
-        await TirageService.tirageLotsPhysiquesFrance();
+        await TirageService.tirageLots();
     }
 
 }
