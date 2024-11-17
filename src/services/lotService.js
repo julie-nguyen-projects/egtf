@@ -91,6 +91,18 @@ const LotService = {
             });
     },
 
+    findByPhysiqueAndUE() {
+        return Lot.findAll({
+            where: {
+                physique: 'Oui',
+                livraison: 'France et UE',
+                gagnant_e: {
+                    [Op.or] : [null, '']
+                }
+            },
+            raw: true
+        },)
+    },
 }
 
 module.exports = LotService;
