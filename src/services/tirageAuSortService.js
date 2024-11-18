@@ -78,6 +78,7 @@ const TirageAuSortService = {
                 const randomEleve = eleves[randomIndex];
 
                 lot.gagnant_e = randomEleve.pseudoDiscord;
+                lot.gagnant_eZoneLivraison = randomEleve.zoneLivraison;
                 await LotService.updateGagnant_e(lot, lot.id);
 
                 // Supprime toutes les entrées de l'élève
@@ -112,6 +113,59 @@ const TirageAuSortService = {
                     return false; // Le tirage n'est pas valide
                 } else {
                     gagnants.add(lot.gagnant_e);
+                }
+            }
+        }
+
+        // On vérifie que les lots attribués à des maisons spécifiques le soient
+        for (const lot of lotsTires) {
+            if (lot.maison) {
+                const maison = lot.maison.toLowerCase();
+                const gagnant = lot.gagnant_e ? lot.gagnant_e.toLowerCase() : ''; // Si gagnant indéfini, on initialise une chaîne vide pour éviter les erreurs dans includes()
+
+                // Vérification que le lot.gagnant_e contient le nom de la maison
+                if (!gagnant.includes(maison)) {
+                    console.error(`Erreur : le gagnant ${lot.gagnant_e} ne contient pas le nom de la maison ${lot.maison}`);
+                    return false;
+                }
+
+            }
+        }
+
+        // On vérifie que la zone de livraison est la bonne
+        for (const lot of lotsTires) {
+            if (lot.gagnant_e) {
+                let livraisonValide = true; // Indicateur pour savoir si la zone de livraison est valide
+
+                switch (lot.livraison) {
+                    case "France":
+                        if (!lot.gagnant_eZoneLivraison.includes("France")) {
+                            console.error(`Erreur : le gagnant ${lot.gagnant_e} résidant à ${lot.gagnant_eZoneLivraison} n'est pas dans la zone de livraison du lot '${lot.livraison}' (${lot.id})`);
+                            livraisonValide = false;
+                        }
+                        break;
+
+                    case "France et UE":
+                        if (!lot.gagnant_eZoneLivraison.includes("France")) {
+                            console.error(`Erreur : le gagnant ${lot.gagnant_e} résidant à ${lot.gagnant_eZoneLivraison} n'est pas dans la zone de livraison du lot '${lot.livraison}' (${lot.id})`);
+                            livraisonValide = false;
+                        }
+                        break;
+
+                    case "Monde":
+                        if (!lot.gagnant_eZoneLivraison.includes("monde") && !lot.gagnant_eZoneLivraison.includes("France")) {
+                            console.error(`Erreur : le gagnant ${lot.gagnant_e} résidant à ${lot.gagnant_eZoneLivraison} n'est pas dans la zone de livraison du lot '${lot.livraison} ' (${lot.id})`);
+                            livraisonValide = false;
+                        }
+                        break;
+                    default:
+                        console.log(`Lot non physique pour le lot : ${lot.nomBoutique} : ${lot.description} ( ${lot.id} ).`);
+                        break;
+                }
+
+                // Si la zone de livraison n'est pas valide, retourner false une fois
+                if (!livraisonValide) {
+                    return false;
                 }
             }
         }

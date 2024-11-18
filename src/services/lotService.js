@@ -71,7 +71,8 @@ const LotService = {
 
     async updateGagnant_e(lot, id) {
         await Lot.update({
-                gagnant_e: lot.gagnant_e
+                gagnant_e: lot.gagnant_e,
+                gagnant_eZoneLivraison: lot.gagnant_eZoneLivraison
             }
             ,
             {

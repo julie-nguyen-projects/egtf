@@ -26,6 +26,9 @@ const Lot = sequelize.define('Lot', {
         },
         gagnant_e: {
             type: DataTypes.STRING
+        },
+        gagnant_eZoneLivraison: {
+            type: DataTypes.STRING
         }
     }
     ,{
