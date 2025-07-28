@@ -73,6 +73,7 @@ const TirageAuSortService = {
      */
     async attribuerLotsAuxEleves(lots, eleves) {
         for (const lot of lots) {
+            console.log("Tirage du lot : " + lot.nomBoutique + " (" + lot.description + ")");
             if (eleves.length > 0) { // Vérification s'il reste des élèves à qui attribuer des lots
                 const randomIndex = Math.floor(Math.random() * eleves.length);
                 const randomEleve = eleves[randomIndex];
@@ -96,11 +97,13 @@ const TirageAuSortService = {
      */
     async checkIfTirageIsOk() {
         const lotsTires = await LotService.findALl();
+        let resultat = true;
 
         // On vérifie qu'aucun lot ne reste sans gagnant
         const isLotSansGagnant = lotsTires.filter(lot => !lot.gagnant_e)
         if (isLotSansGagnant.length > 0) {
             console.error("Attention, il reste un ou des lot(s) sans gagnant(e) : " + isLotSansGagnant);
+            resultat = false;
         }
 
 
@@ -110,7 +113,7 @@ const TirageAuSortService = {
             if (lot.gagnant_e) {
                 if (gagnants.has(lot.gagnant_e)) { // Vérification si le gagnant est déjà dans le Set
                     console.error(`Erreur: ${lot.gagnant_e} a gagné deux lots ou + !`);
-                    return false; // Le tirage n'est pas valide
+                    resultat = false; // Le tirage n'est pas valide
                 } else {
                     gagnants.add(lot.gagnant_e);
                 }
@@ -126,7 +129,7 @@ const TirageAuSortService = {
                 // Vérification que le lot.gagnant_e contient le nom de la maison
                 if (!gagnant.includes(maison)) {
                     console.error(`Erreur : le gagnant ${lot.gagnant_e} ne contient pas le nom de la maison ${lot.maison}`);
-                    return false;
+                    resultat = false;
                 }
 
             }
@@ -142,6 +145,7 @@ const TirageAuSortService = {
                         if (!lot.gagnant_eZoneLivraison.includes("France")) {
                             console.error(`Erreur : le gagnant ${lot.gagnant_e} résidant à ${lot.gagnant_eZoneLivraison} n'est pas dans la zone de livraison du lot '${lot.livraison}' (${lot.id})`);
                             livraisonValide = false;
+                            resultat = false;
                         }
                         break;
 
@@ -149,6 +153,7 @@ const TirageAuSortService = {
                         if (!lot.gagnant_eZoneLivraison.includes("France")) {
                             console.error(`Erreur : le gagnant ${lot.gagnant_e} résidant à ${lot.gagnant_eZoneLivraison} n'est pas dans la zone de livraison du lot '${lot.livraison}' (${lot.id})`);
                             livraisonValide = false;
+                            resultat = false;
                         }
                         break;
 
@@ -156,21 +161,22 @@ const TirageAuSortService = {
                         if (!lot.gagnant_eZoneLivraison.includes("monde") && !lot.gagnant_eZoneLivraison.includes("France")) {
                             console.error(`Erreur : le gagnant ${lot.gagnant_e} résidant à ${lot.gagnant_eZoneLivraison} n'est pas dans la zone de livraison du lot '${lot.livraison} ' (${lot.id})`);
                             livraisonValide = false;
+                            resultat = false;
                         }
                         break;
                     default:
-                        console.log(`Lot non physique pour le lot : ${lot.nomBoutique} : ${lot.description} ( ${lot.id} ).`);
+                        // console.log(`Lot non physique pour le lot : ${lot.nomBoutique} : ${lot.description} ( ${lot.id} ).`);
                         break;
                 }
 
                 // Si la zone de livraison n'est pas valide, retourner false une fois
                 if (!livraisonValide) {
-                    return false;
+                    resultat = false;
                 }
             }
         }
 
-        return true; // Le tirage est valide
+        return resultat; // Le tirage est valide
     },
 
     /*

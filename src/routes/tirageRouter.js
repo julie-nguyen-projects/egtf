@@ -15,12 +15,12 @@ router.get('/', ( (req, res) => {
 );
 
 /* POST Tirage Lots Physique France /tirage/physFrance */
-router.post('/physFrance',  async (req, res) => {
+router.post('/',  async (req, res) => {
 
     try {
-        await TirageController.tirageLotsPhysiquesFrance();
+        const resultatTirage = await TirageController.tirageLotsPhysiquesFrance();
         res.redirect("/lots");
-        // TODO affichage ?
+       // res.redirect("/tirage/resultat", { resultatTirage });
 
     } catch (err) {
         console.error(err);
