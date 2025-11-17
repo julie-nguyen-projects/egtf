@@ -95,12 +95,12 @@ router.post("/delete/:id", async (req, res) => {
 /**
  * Delete all Lots
  */
-router.get("/deleteAll", (req, res) => {
-    res.render('deleteAll');
+router.get("/deleteAllLots", (req, res) => {
+    res.render('deleteAllLots');
 });
 
 
-router.post("/deleteAll", async (req, res) => {
+router.post("/deleteAllLots", async (req, res) => {
     await LotController.deleteAll();
     res.redirect('/lots')
 });

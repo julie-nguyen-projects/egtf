@@ -1,0 +1,17 @@
+<%- include("_header") -%>
+
+<div class="container">
+    <form action="/eleves/deleteAllEleves" method="post">
+
+        <h1>Voulez-vous supprimer tous les élèves de la base de données ?</h1>
+
+        <div class="form-group row">
+            <div class="col-sm-12">
+                <input type="submit" value="Valider la suppression" class="btn btn-default btn-success col-sm-4" />
+                <a class="btn btn-outline-dark cancel col-sm-4 offset-2" href="/eleves">Annuler</a>
+            </div>
+        </div>
+    </form>
+</div>
+
+<%- include("_footer") -%>
