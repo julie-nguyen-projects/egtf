@@ -113,5 +113,18 @@ router.post("/delete/:id", async (req, res) => {
     }
 });
 
+/**
+ * Delete all Eleves
+ */
+router.get("/deleteAllEleves", (req, res) => {
+    res.render('deleteAllEleves');
+});
+
+
+router.post("/deleteAllEleves", async (req, res) => {
+    await EleveController.deleteAll();
+    res.redirect('/eleves')
+});
+
 
 module.exports = router;

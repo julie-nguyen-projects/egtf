@@ -20,6 +20,10 @@ const EleveController = {
     deleteEleve: (id) => {
         return EleveService.delete(id);
     },
+
+    deleteAll: () => {
+        return EleveService.deleteAll();
+    },
 }
 
 module.exports = EleveController;

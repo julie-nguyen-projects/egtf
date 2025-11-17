@@ -80,6 +80,10 @@ const EleveService = {
             raw: true
         })
     },
+
+    deleteAll() {
+        return Eleve.truncate();
+    },
 }
 
 module.exports = EleveService;
